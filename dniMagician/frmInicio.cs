@@ -44,5 +44,18 @@ namespace dniMagician
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnCheckDNI_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmCheckDNI dni = new frmCheckDNI(debug);
+                dni.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

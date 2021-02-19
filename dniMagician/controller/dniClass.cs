@@ -15,10 +15,15 @@ namespace dniMagician.controller
         {
             try
             {
-                if (input.Trim().Length != 8) {
+                if (input.Trim().Length != 8&& input.Trim().Length != 9) {
                     result = "El número de valores insertado es incorrecto";
                     return -1;
                 }
+
+                if (input.Trim().Length == 9) {
+                    input = input.Substring(0, input.Length - 1);
+                }
+
                 String auxResult = foreignDNI(input);
                 result = auxResult;
 
@@ -162,6 +167,20 @@ namespace dniMagician.controller
             catch (Exception ex)
             {
                 return String.Empty;
+
+            }
+        }
+
+        public Boolean checkDNI(String dni, String letra) {
+            try {
+                String letterGiven = dni.Substring(dni.Length - 1, 1);
+                String letter = letra.Substring(letra.Length - 1, 1);
+                if (letterGiven != letter) return false;
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
 
             }
         }

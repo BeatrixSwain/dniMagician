@@ -69,6 +69,12 @@
     <Compile Include="frmCheckCIF.Designer.cs">
       <DependentUpon>frmCheckCIF.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmCheckDNI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheckDNI.Designer.cs">
+      <DependentUpon>frmCheckDNI.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmCompany.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,6 +98,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmCheckCIF.resx">
       <DependentUpon>frmCheckCIF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCheckDNI.resx">
+      <DependentUpon>frmCheckDNI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmCompany.resx">
       <DependentUpon>frmCompany.cs</DependentUpon>
