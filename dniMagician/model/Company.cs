@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 
 namespace dniMagician.model
 {
-    public class empresa
+    public class Company
     {
-        public empresa() { }
+        public Company() { }
         public string CIF { get; set; }
         public Boolean isValid { get; set; }
         public string Province { get; set; }
         public string typeSociety { get; set; }
+        public String letterType { get; set; }
+        public String controlDigit { get; set; }
+        public int numProvince { get; set; }
     }
 }

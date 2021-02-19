@@ -63,6 +63,12 @@
   <ItemGroup>
     <Compile Include="controller\cifClass.cs" />
     <Compile Include="controller\dniClass.cs" />
+    <Compile Include="frmCheckCIF.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCheckCIF.Designer.cs">
+      <DependentUpon>frmCheckCIF.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmGetLetterDNI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,9 +81,12 @@
     <Compile Include="frmInicio.Designer.cs">
       <DependentUpon>frmInicio.cs</DependentUpon>
     </Compile>
-    <Compile Include="model\empresa.cs" />
+    <Compile Include="model\Company.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmCheckCIF.resx">
+      <DependentUpon>frmCheckCIF.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmGetLetterDNI.resx">
       <DependentUpon>frmGetLetterDNI.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +129,10 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TESTS\TextFile1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

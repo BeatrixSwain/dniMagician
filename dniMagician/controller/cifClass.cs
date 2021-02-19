@@ -8,14 +8,105 @@ namespace dniMagician.controller
 {
     public class cifClass
     {
+        private const int VALUE_TO_DC = 10;
         public cifClass() { }
 
-
-
-        private String getProvince(int code)
+        public int checkCIF(string output, out model.Company company, out String message)
         {
             try
             {
+                if (output.Trim().Length != 9)
+                {
+                    company = null;
+                    message = "El CIF debe tener 9 carácteres";
+                    return -1;
+                }
+                ///
+
+                char[] auxArray = output.ToCharArray(0, output.Length);
+                int auxNumProvince = 0;
+                int aux = 0;
+                company = new model.Company();
+                company.letterType = auxArray[0].ToString();
+                company.controlDigit = auxArray[auxArray.Length - 1].ToString();
+                company.CIF = output;
+                if (!Int32.TryParse(auxArray[1].ToString() + "" + auxArray[2].ToString(), out auxNumProvince))
+                {
+                    message = "Hubo un error al procesar la provincia";
+                    return -2;
+                }
+                company.numProvince = auxNumProvince;
+                company.Province = getProvince(auxNumProvince, out aux);
+                if (aux == -2)
+                {
+                    message = "Hubo un error al obtener la Provincia.";
+                    company = null;
+                    return -3;
+                }
+                else if (aux == -1)
+                {
+                    message = "No se encontró el nombre de la provincia.";
+                }
+                else if (aux < -2)
+                {
+                    message = "Hubo un error al obtener la provincia.";
+                    company = null;
+                    return -4;
+                }
+
+                company.typeSociety = getTypeSociety(company.letterType, out aux);
+                if (aux == -2)
+                {
+                    message = "Hubo un error al obtener el tipo.";
+                    company = null;
+                    return -3;
+                }
+                else if (aux == -1)
+                {
+                    message = "No se encontró el nombre de el tipo.";
+                }
+                else if (aux < -2)
+                {
+                    message = "Hubo un error al obtener el tipo.";
+                    company = null;
+                    return -4;
+                }
+
+                int[] central7 = getCentral7Digit(auxArray);
+                if (central7 == null)
+                {
+                    message = "Hubo un error al procesar el CIF.";
+                    company = null;
+                    return -5;
+                }
+
+                if (processCentral7Digit(central7, company.letterType, company.controlDigit))
+                {
+                    company.isValid = true;
+                    message = "OK";
+                    return 0;
+                }
+                else
+                {
+                    message = "Hubo un error al procesar el CIF.";
+                    company = null;
+                    return -6;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                company = null;
+                message = ex.Message;
+                return -1;
+            }
+        }
+
+        private String getProvince(int code, out int result)
+        {
+            try
+            {
+                result = 0;
                 switch (code)
                 {
                     case 00: return "No Residente";
@@ -63,7 +154,6 @@ namespace dniMagician.controller
                     case 14:
                     case 56:
                         return "Córdoba";
-                    case 15: case 70: return "La Coruña";
                     case 16:
                         return "Cuenca";
                     case 17:
@@ -171,22 +261,26 @@ namespace dniMagician.controller
                     case 52:
                         return "Melilla";
                     default:
+                        result = -1;
                         return "Code: " + code;
                 }
 
             }
             catch (Exception ex)
             {
+                result = -2;
                 return "Hubo un error al obtener la provincia: " + ex.Message;
 
             }
         }
 
-        private string typeSociety(string code)
+        private string getTypeSociety(string code, out int result)
         {
             try
             {
-                switch (code) {
+                result = 0;
+                switch (code)
+                {
                     case "A":
                         return "Sociedad anónima";
                     case "B":
@@ -222,13 +316,221 @@ namespace dniMagician.controller
                     case "W":
                         return "Establecimiento permanentes de entidades no residente en España";
                     default:
+                        result = -1;
                         return String.Empty;
                 }
             }
             catch (Exception ex)
             {
+                result = -2;
                 return "Hubo un error al obtener la tipologia de sociedad: " + ex.Message;
 
+            }
+        }
+
+        private int[] getCentral7Digit(char[] output)
+        {
+            try
+            {
+                if (output.Length != 9)
+                {
+                    return null;
+                }
+
+                int[] auxOutPut = new int[output.Length - 2];
+                for (int i = 1; i < output.Length - 1; i++)
+                {
+                    int aux = -1;
+                    if (!Int32.TryParse(output[i].ToString(), out aux)) return null;
+                    auxOutPut[i - 1] = aux;
+                }
+
+                return auxOutPut;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        private Boolean processCentral7Digit(int[] central7, String type, String controlDigit)
+        {
+            try
+            {
+                if (central7.Length != 7) return false;
+                int calculated = -1;
+                int a = 0;
+                int b = 0;
+                int c = 0;
+                int d = 0;
+
+
+                for (int i = 0; i < central7.Length; i++)
+                {
+                    if ((i + 1) % 2 == 0)
+                    {//Digitos pares
+                        a += central7[i];
+                    }
+                    else
+                    { //Digitos impares
+                        int auxOdd = getOddNumberResult(central7[i]);
+                        if (auxOdd == -6) return false;
+                        b += auxOdd;
+                    }
+                }
+
+                //Sumar dígitos pares e impares
+                c = a + b;
+                String cAux = c.ToString("D2");
+                char[] auxDArray = cAux.ToCharArray();
+                String auxD = auxDArray[auxDArray.Length - 1].ToString();
+                if (!Int32.TryParse(auxD, out d)) return false;
+                if (d != 0)
+                {
+                    d = VALUE_TO_DC - d;
+                }
+                calculated = d;
+                return checkDigitControl(controlDigit, calculated, type);
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private Boolean checkDigitControl(String dcGiven, int dcCalculated, String type)
+        {
+            try
+            {
+                int typeDC = typeSocietyDC_SHOW(type);
+                if (typeDC == 1)
+                {
+                    int aux = 0;
+                    if (!Int32.TryParse(dcGiven, out aux)) return false;
+                    if (aux != dcCalculated) return false;
+                }
+                else if (typeDC == 0)
+                {
+                    String auxCalculated_str = letter_to_dcCalculated(dcCalculated);
+                    if (auxCalculated_str != dcGiven) return false;
+                }
+                else if ((typeDC == 2))
+                {
+                    int aux = 0;
+                    if (!Int32.TryParse(dcGiven, out aux))
+                    {
+                        String auxCalculated_str = letter_to_dcCalculated(dcCalculated);
+                        if (auxCalculated_str != dcGiven) return false;
+                    }
+                    else
+                    {
+                        if (aux != dcCalculated) return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private int getOddNumberResult(int odd)
+        {
+            try
+            {
+                int aux = odd * 2;
+                string auxStr = aux.ToString("D2");
+                char[] auxChar = auxStr.ToCharArray();
+                int result = 0;
+
+                for (int i = 0; i < auxChar.Length; i++)
+                {
+                    int auxResult = -1;
+                    if (!Int32.TryParse(auxChar[i].ToString(), out auxResult)) return -6;
+                    result += auxResult;
+                }
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return -6;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns>0 - Letra, 1 - Numero, 2 - Pueden ser ambas</returns>
+        private int typeSocietyDC_SHOW(string type)
+        {
+            try
+            {
+                switch (type)
+                {
+                    case "P":
+                    case "Q":
+                    case "R":
+                    case "S":
+                    case "W":
+                        return 0;
+                    case "A":
+                    case "B":
+                    case "E":
+                    case "H":
+                        return 1;
+                    default:
+                        return 2;
+                }
+            }
+            catch (Exception ex)
+            {
+                return -6;
+            }
+        }
+
+        private String letter_to_dcCalculated(int calculated)
+        {
+            try
+            {
+                switch (calculated) {
+                    case 0:
+                        return "J";
+                    case 1:
+                        return "A";
+                    case 2:
+                        return "B";
+                    case 3:
+                        return "C";
+                    case 4:
+                        return "D";
+                    case 5:
+                        return "E";
+                    case 6:
+                        return "F";
+                    case 7:
+                        return "G";
+                    case 8:
+                        return "H";
+                    case 9:
+                        return "I";
+                    default:
+                        return String.Empty;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return String.Empty;
             }
         }
     }//

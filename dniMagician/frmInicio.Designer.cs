@@ -53,6 +53,7 @@ namespace dniMagician
             this.btnCheckCIF.TabIndex = 1;
             this.btnCheckCIF.Text = "Check CIF";
             this.btnCheckCIF.UseVisualStyleBackColor = true;
+            this.btnCheckCIF.Click += new System.EventHandler(this.btnCheckCIF_Click);
             // 
             // frmInicio
             // 

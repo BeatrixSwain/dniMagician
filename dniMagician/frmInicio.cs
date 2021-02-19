@@ -29,5 +29,18 @@ namespace dniMagician
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnCheckCIF_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                frmCheckCIF cif = new frmCheckCIF();
+                cif.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }
