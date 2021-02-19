@@ -16,7 +16,16 @@ namespace dniMagician.controller
             {
                 String auxResult = dniExtranjero(input);
                 result = auxResult;
-                return 0;
+
+                if (auxResult.Trim().Length > 0)
+                {
+
+                    return 0;
+                }
+                else {
+                    result = "El número insertado no es válido";
+                    return -2;
+                }
             }
             catch (Exception ex)
             {

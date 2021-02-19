@@ -33,6 +33,7 @@ namespace dniMagician
             this.btnCalcular = new System.Windows.Forms.Button();
             this.txtResult = new System.Windows.Forms.TextBox();
             this.btnCopy = new System.Windows.Forms.Button();
+            this.lbError = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtDNI
@@ -76,12 +77,21 @@ namespace dniMagician
             this.btnCopy.Text = "Copiar portapapeles";
             this.btnCopy.UseVisualStyleBackColor = true;
             // 
+            // lbError
+            // 
+            this.lbError.Location = new System.Drawing.Point(32, 4);
+            this.lbError.Name = "lbError";
+            this.lbError.Size = new System.Drawing.Size(318, 23);
+            this.lbError.TabIndex = 4;
+            this.lbError.Text = "lbError";
+            // 
             // frmDNI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(377, 145);
+            this.Controls.Add(this.lbError);
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.txtResult);
             this.Controls.Add(this.btnCalcular);
@@ -101,6 +111,7 @@ namespace dniMagician
         private System.Windows.Forms.Button btnCalcular;
         private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.Button btnCopy;
+        private System.Windows.Forms.Label lbError;
     }
 }
 
