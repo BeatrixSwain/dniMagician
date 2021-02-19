@@ -15,6 +15,10 @@ namespace dniMagician.controller
         {
             try
             {
+                if (input.Trim().Length != 8) {
+                    result = "El número de valores insertado es incorrecto";
+                    return -1;
+                }
                 String auxResult = foreignDNI(input);
                 result = auxResult;
 
@@ -35,7 +39,7 @@ namespace dniMagician.controller
                         else
                         {
                             result = "Error al obtener la letra de " + input + ", r=" + remainder;
-                            return -4;
+                            return -2;
                         }
                     }
                     else
@@ -47,13 +51,13 @@ namespace dniMagician.controller
                 else
                 {
                     result = "El número insertado no es válido";
-                    return -2;
+                    return -4;
                 }
             }
             catch (Exception ex)
             {
                 result = ex.Message;
-                return -1;
+                return -5;
 
             }
         }
