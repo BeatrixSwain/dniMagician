@@ -12,6 +12,7 @@ namespace dniMagician
 {
     public partial class frmDNI : Form
     {
+        private controller.dniClass dni = new controller.dniClass();            
         public frmDNI()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace dniMagician
 
         }
          
+
         //
 
     }//
