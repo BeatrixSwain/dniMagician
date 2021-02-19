@@ -10,6 +10,8 @@ namespace dniMagician.controller
     {
         public cifClass() { }
 
+
+
         private String getProvince(int code)
         {
             try
@@ -180,6 +182,54 @@ namespace dniMagician.controller
             }
         }
 
-        private 
+        private string typeSociety(string code)
+        {
+            try
+            {
+                switch (code) {
+                    case "A":
+                        return "Sociedad anónima";
+                    case "B":
+                        return "Sociedad de responsabilidad limitada";
+                    case "C":
+                        return "Sociedad colectiva";
+                    case "D":
+                        return "Sociedad comanditarias";
+                    case "E":
+                        return "Comunidad de bienes";
+                    case "F":
+                        return "Sociedad cooperativa";
+                    case "G":
+                        return "Asociaciones y fundaciones";
+                    case "H":
+                        return "Comunidad de propietarios en régimen de propiedad horizontal";
+                    case "J":
+                        return "Sociedad Civil";
+                    case "N":
+                        return "Entidad no residente";
+                    case "P":
+                        return "Corporación local";
+                    case "Q":
+                        return "Organismos autónomos, estatales o no, y asimilados, y congregaciones e instituciones religiosas";
+                    case "R":
+                        return "Congregaciones e instituciones religiosas(desde 2008)";
+                    case "S":
+                        return "Órganos de la Administración del Estado y cominidades autónomas";
+                    case "U":
+                        return "Uniones Temporales de Empresas";
+                    case "V":
+                        return "Sociedad Agraria de Transformación";
+                    case "W":
+                        return "Establecimiento permanentes de entidades no residente en España";
+                    default:
+                        return String.Empty;
+                }
+            }
+            catch (Exception ex)
+            {
+                return "Hubo un error al obtener la tipologia de sociedad: " + ex.Message;
+
+            }
+        }
     }//
 }

@@ -16,7 +16,7 @@ namespace dniMagician
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmDNI());
+            Application.Run(new frmInicio());
         }
     }
 }

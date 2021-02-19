@@ -1,7 +1,7 @@
 ﻿
 namespace dniMagician
 {
-    partial class frmDNI
+    partial class frmGetLetterDNI
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -97,7 +97,7 @@ namespace dniMagician
             this.lbInstruc.TabIndex = 5;
             this.lbInstruc.Text = "Inserte los ocho primeros valores del DNI/NIE";
             // 
-            // frmDNI
+            // frmGetLetterDNI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,8 +111,9 @@ namespace dniMagician
             this.Controls.Add(this.txtDNI);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmDNI";
-            this.Text = "DNI VALIDATION";
+            this.Name = "frmGetLetterDNI";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "DNI LETTER";
             this.ResumeLayout(false);
             this.PerformLayout();
 

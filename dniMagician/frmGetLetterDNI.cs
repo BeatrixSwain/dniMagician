@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace dniMagician
 {
-    public partial class frmDNI : Form
+    public partial class frmGetLetterDNI : Form
     {
         private controller.dniClass dni = new controller.dniClass();
-        public frmDNI()
+        public frmGetLetterDNI()
         {
             InitializeComponent();
             lbError.Text = String.Empty;
@@ -27,7 +27,7 @@ namespace dniMagician
                 txtResult.Text = String.Empty;
 
                 String newDNI = String.Empty;
-                int res = dni.processDNI(txtDNI.Text, out newDNI);
+                int res = dni.processDNI(txtDNI.Text.Trim().ToUpper(), out newDNI);
 
                 if (res < 0)
                 {

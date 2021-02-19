@@ -3,3 +3,5 @@
 formInicial -> check dni.
 
 Controller dni -> controller.dniClass
+
+### Menu y check cif.
