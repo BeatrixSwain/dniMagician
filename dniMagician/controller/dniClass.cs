@@ -8,7 +8,7 @@ namespace dniMagician.controller
 {
     public class dniClass
     {
-        public dniClass() { };
+        public dniClass() { }
 
         public int getLetter(String input, out String result)
         {
