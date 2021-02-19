@@ -34,6 +34,7 @@ namespace dniMagician
             this.txtResult = new System.Windows.Forms.TextBox();
             this.btnCopy = new System.Windows.Forms.Button();
             this.lbError = new System.Windows.Forms.Label();
+            this.lbInstruc = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtDNI
@@ -76,21 +77,33 @@ namespace dniMagician
             this.btnCopy.TabIndex = 3;
             this.btnCopy.Text = "Copiar portapapeles";
             this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // lbError
             // 
-            this.lbError.Location = new System.Drawing.Point(32, 4);
+            this.lbError.Location = new System.Drawing.Point(32, 118);
             this.lbError.Name = "lbError";
             this.lbError.Size = new System.Drawing.Size(318, 23);
             this.lbError.TabIndex = 4;
             this.lbError.Text = "lbError";
+            // 
+            // lbInstruc
+            // 
+            this.lbInstruc.AutoSize = true;
+            this.lbInstruc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbInstruc.Location = new System.Drawing.Point(29, 5);
+            this.lbInstruc.Name = "lbInstruc";
+            this.lbInstruc.Size = new System.Drawing.Size(280, 16);
+            this.lbInstruc.TabIndex = 5;
+            this.lbInstruc.Text = "Inserte los ocho primeros valores del DNI/NIE";
             // 
             // frmDNI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(377, 145);
+            this.ClientSize = new System.Drawing.Size(383, 148);
+            this.Controls.Add(this.lbInstruc);
             this.Controls.Add(this.lbError);
             this.Controls.Add(this.btnCopy);
             this.Controls.Add(this.txtResult);
@@ -99,7 +112,7 @@ namespace dniMagician
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmDNI";
-            this.Text = "DNI";
+            this.Text = "DNI VALIDATION";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,6 +125,7 @@ namespace dniMagician
         private System.Windows.Forms.TextBox txtResult;
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.Label lbError;
+        private System.Windows.Forms.Label lbInstruc;
     }
 }
 
