@@ -36,7 +36,7 @@ namespace dniMagician
             // btnGetLetter
             // 
             this.btnGetLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGetLetter.Location = new System.Drawing.Point(47, 93);
+            this.btnGetLetter.Location = new System.Drawing.Point(120, 93);
             this.btnGetLetter.Name = "btnGetLetter";
             this.btnGetLetter.Size = new System.Drawing.Size(75, 23);
             this.btnGetLetter.TabIndex = 0;
@@ -47,7 +47,7 @@ namespace dniMagician
             // btnCheckCIF
             // 
             this.btnCheckCIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckCIF.Location = new System.Drawing.Point(162, 93);
+            this.btnCheckCIF.Location = new System.Drawing.Point(233, 93);
             this.btnCheckCIF.Name = "btnCheckCIF";
             this.btnCheckCIF.Size = new System.Drawing.Size(75, 23);
             this.btnCheckCIF.TabIndex = 1;

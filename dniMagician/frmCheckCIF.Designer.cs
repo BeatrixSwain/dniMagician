@@ -33,6 +33,7 @@ namespace dniMagician
             this.btnCheckCIF = new System.Windows.Forms.Button();
             this.lbResultado = new System.Windows.Forms.Label();
             this.lbError = new System.Windows.Forms.Label();
+            this.btnVer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtCIF
@@ -40,7 +41,7 @@ namespace dniMagician
             this.txtCIF.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCIF.Location = new System.Drawing.Point(49, 65);
             this.txtCIF.Name = "txtCIF";
-            this.txtCIF.Size = new System.Drawing.Size(262, 22);
+            this.txtCIF.Size = new System.Drawing.Size(273, 22);
             this.txtCIF.TabIndex = 0;
             // 
             // btnCheckCIF
@@ -75,12 +76,24 @@ namespace dniMagician
             this.lbError.Text = "label1";
             this.lbError.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // btnVer
+            // 
+            this.btnVer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVer.Location = new System.Drawing.Point(122, 137);
+            this.btnVer.Name = "btnVer";
+            this.btnVer.Size = new System.Drawing.Size(117, 23);
+            this.btnVer.TabIndex = 4;
+            this.btnVer.Text = "Ver datos CIF";
+            this.btnVer.UseVisualStyleBackColor = true;
+            this.btnVer.Click += new System.EventHandler(this.btnVer_Click);
+            // 
             // frmCheckCIF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(371, 162);
+            this.ClientSize = new System.Drawing.Size(371, 172);
+            this.Controls.Add(this.btnVer);
             this.Controls.Add(this.lbError);
             this.Controls.Add(this.lbResultado);
             this.Controls.Add(this.btnCheckCIF);
@@ -101,5 +114,6 @@ namespace dniMagician
         private System.Windows.Forms.Button btnCheckCIF;
         private System.Windows.Forms.Label lbResultado;
         private System.Windows.Forms.Label lbError;
+        private System.Windows.Forms.Button btnVer;
     }
 }

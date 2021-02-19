@@ -80,7 +80,7 @@ namespace dniMagician.controller
                     return -5;
                 }
 
-                if (processCentral7Digit(central7, company.letterType, company.controlDigit))
+                if (processCentral7Digit(central7, company.letterType, company.controlDigit, company.numProvince, out message))
                 {
                     company.isValid = true;
                     message = "OK";
@@ -88,7 +88,6 @@ namespace dniMagician.controller
                 }
                 else
                 {
-                    message = "Hubo un error al procesar el CIF.";
                     company = null;
                     return -6;
                 }
@@ -354,10 +353,11 @@ namespace dniMagician.controller
 
         }
 
-        private Boolean processCentral7Digit(int[] central7, String type, String controlDigit)
+        private Boolean processCentral7Digit(int[] central7, String type, String controlDigit, int numProvince, out String message)
         {
             try
             {
+                message = "Hubo un error al procesar el CIF";
                 if (central7.Length != 7) return false;
                 int calculated = -1;
                 int a = 0;
@@ -391,20 +391,23 @@ namespace dniMagician.controller
                     d = VALUE_TO_DC - d;
                 }
                 calculated = d;
-                return checkDigitControl(controlDigit, calculated, type);
+                message = String.Empty;
+                return checkDigitControl(controlDigit, calculated, type,  numProvince, out message);
 
             }
             catch (Exception ex)
             {
+                message = "Hubo un error al procesar el CIF";
                 return false;
             }
         }
 
-        private Boolean checkDigitControl(String dcGiven, int dcCalculated, String type)
+        private Boolean checkDigitControl(String dcGiven, int dcCalculated, String type, int numProvince, out String message)
         {
             try
             {
-                int typeDC = typeSocietyDC_SHOW(type);
+                message = "CIF incorrecto";
+                int typeDC = typeSocietyDC_SHOW(type, numProvince);
                 if (typeDC == 1)
                 {
                     int aux = 0;
@@ -433,11 +436,12 @@ namespace dniMagician.controller
                 {
                     return false;
                 }
-
+                message = String.Empty;
                 return true;
             }
             catch (Exception ex)
             {
+                message = "Hubo un error al procesar el CIF";
                 return false;
             }
         }
@@ -471,7 +475,7 @@ namespace dniMagician.controller
         /// </summary>
         /// <param name="type"></param>
         /// <returns>0 - Letra, 1 - Numero, 2 - Pueden ser ambas</returns>
-        private int typeSocietyDC_SHOW(string type)
+        private int typeSocietyDC_SHOW(string type, int numProvince)
         {
             try
             {
@@ -489,6 +493,10 @@ namespace dniMagician.controller
                     case "H":
                         return 1;
                     default:
+                        if (numProvince == 0)
+                        {
+                            return 0;
+                        }
                         return 2;
                 }
             }
@@ -502,7 +510,8 @@ namespace dniMagician.controller
         {
             try
             {
-                switch (calculated) {
+                switch (calculated)
+                {
                     case 0:
                         return "J";
                     case 1:

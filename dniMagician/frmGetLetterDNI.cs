@@ -13,10 +13,12 @@ namespace dniMagician
     public partial class frmGetLetterDNI : Form
     {
         private controller.dniClass dni = new controller.dniClass();
-        public frmGetLetterDNI()
+        private Boolean debug;
+        public frmGetLetterDNI(Boolean _debug)
         {
             InitializeComponent();
             lbError.Text = String.Empty;
+            debug = _debug;
         }
 
         private void btnCalcular_Click(object sender, EventArgs e)
@@ -46,13 +48,15 @@ namespace dniMagician
 
         private void btnCopy_Click(object sender, EventArgs e)
         {
-            try {
+            try
+            {
                 if (txtResult.Text.Trim().Length > 0)
                 {
                     Clipboard.SetText(txtResult.Text);
                     lbError.Text = "¡DNI copiado!";
                 }
-                else {
+                else
+                {
                     lbError.Text = "No hay nada que copiar :(";
                 }
             }

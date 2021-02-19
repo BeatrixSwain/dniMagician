@@ -10,8 +10,10 @@ using System.Windows.Forms;
 
 namespace dniMagician
 {
+
     public partial class frmInicio : Form
     {
+        public Boolean debug = true;
         public frmInicio()
         {
             InitializeComponent();
@@ -21,7 +23,7 @@ namespace dniMagician
         {
             try
             {
-                frmGetLetterDNI dni = new frmGetLetterDNI();
+                frmGetLetterDNI dni = new frmGetLetterDNI(debug);
                 dni.ShowDialog();
             }
             catch (Exception ex)
@@ -34,7 +36,7 @@ namespace dniMagician
         {
             try
             {
-                frmCheckCIF cif = new frmCheckCIF();
+                frmCheckCIF cif = new frmCheckCIF(debug);
                 cif.ShowDialog();
             }
             catch (Exception ex)
