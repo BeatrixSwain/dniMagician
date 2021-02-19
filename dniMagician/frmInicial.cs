@@ -25,7 +25,7 @@ namespace dniMagician
             txtResult.Text = String.Empty;
 
             String newDNI = String.Empty;
-            int res = dni.getLetter(txtDNI.Text, out newDNI);
+            int res = dni.processDNI(txtDNI.Text, out newDNI);
          
             if (res < 0)
             {
