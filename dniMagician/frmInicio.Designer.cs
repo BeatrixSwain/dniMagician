@@ -36,9 +36,9 @@ namespace dniMagician
             // btnGetLetter
             // 
             this.btnGetLetter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnGetLetter.Location = new System.Drawing.Point(120, 93);
+            this.btnGetLetter.Location = new System.Drawing.Point(51, 64);
             this.btnGetLetter.Name = "btnGetLetter";
-            this.btnGetLetter.Size = new System.Drawing.Size(75, 23);
+            this.btnGetLetter.Size = new System.Drawing.Size(136, 23);
             this.btnGetLetter.TabIndex = 0;
             this.btnGetLetter.Text = "Get letter";
             this.btnGetLetter.UseVisualStyleBackColor = true;
@@ -47,9 +47,9 @@ namespace dniMagician
             // btnCheckCIF
             // 
             this.btnCheckCIF.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCheckCIF.Location = new System.Drawing.Point(233, 93);
+            this.btnCheckCIF.Location = new System.Drawing.Point(51, 115);
             this.btnCheckCIF.Name = "btnCheckCIF";
-            this.btnCheckCIF.Size = new System.Drawing.Size(75, 23);
+            this.btnCheckCIF.Size = new System.Drawing.Size(136, 23);
             this.btnCheckCIF.TabIndex = 1;
             this.btnCheckCIF.Text = "Check CIF";
             this.btnCheckCIF.UseVisualStyleBackColor = true;
@@ -60,7 +60,7 @@ namespace dniMagician
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(423, 229);
+            this.ClientSize = new System.Drawing.Size(260, 206);
             this.Controls.Add(this.btnCheckCIF);
             this.Controls.Add(this.btnGetLetter);
             this.MaximizeBox = false;
